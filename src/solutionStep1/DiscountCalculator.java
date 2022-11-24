@@ -2,12 +2,14 @@
 
 package solutionStep1;
 
+import solutionStep1.Percent;
+
 import java.util.Scanner;
 
 public class DiscountCalculator {
-    public static double calcDiscount(double amount, Percent percent) {
+    public static double calcDiscount(MonetaryAmount monetaryAmount, Percent percent) {
 
-        return amount - amount * percent.getPercentage() / 100;
+        return monetaryAmount.amount() - monetaryAmount.amount() * percent.getPercentage() / 100;
     }
 
     public static void main(String[] args) {
@@ -16,19 +18,19 @@ public class DiscountCalculator {
         System.out.print("Enter the total amount of your shopping: ");
         double totalAmount = scan.nextFloat();
 
-        System.out.println(calculateTotalPrice(totalAmount));
+        System.out.println(calculateTotalPrice(new MonetaryAmount(totalAmount)));
     }
 
-    public static String calculateTotalPrice(double totalAmount) {
+    public static String calculateTotalPrice(MonetaryAmount totalAmount) {
         Percent percentage;
 
-        if (totalAmount <= 80) {
+        if (totalAmount.amount() <= 80) {
             percentage = new Percent(0);
-        } else if (totalAmount > 80 && totalAmount <= 150) {
+        } else if (totalAmount.amount() > 80 && totalAmount.amount() <= 150) {
             percentage = new Percent(10);
-        } else if (totalAmount > 150 && totalAmount <= 250) {
+        } else if (totalAmount.amount() > 150 && totalAmount.amount() <= 250) {
             percentage = new Percent(15);
-        } else if (totalAmount > 250 && totalAmount <= 500) {
+        } else if (totalAmount.amount() > 250 && totalAmount.amount() <= 500) {
             percentage = new Percent(20);
         } else {
             percentage = new Percent(30);
@@ -36,11 +38,11 @@ public class DiscountCalculator {
 
         double discount = calcDiscount(totalAmount, percentage);
 
-        if (totalAmount <= 80)
-            return "You need to pay " + totalAmount;
+        if (totalAmount.amount() <= 80)
+            return "You need to pay " + totalAmount.amount(); // or totalAmount.toString()
         else {
             return "Congrats, you've got " + percentage.getPercentage() + "% discount on the total purchase!"
-                + "\nYou save " + (totalAmount - discount)
+                + "\nYou save " + (totalAmount.amount() - discount)
                 + "\nNow you only need to pay " + discount;
         }
     }
