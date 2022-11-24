@@ -2,14 +2,15 @@
 
 package solutionStep1;
 
+import solutionStep1.MonetaryAmount;
 import solutionStep1.Percent;
 
 import java.util.Scanner;
 
 public class DiscountCalculator {
-    public static double calcDiscount(MonetaryAmount monetaryAmount, Percent percent) {
+    public static DiscountedAmount calcDiscount(MonetaryAmount monetaryAmount, Percent percent) {
 
-        return monetaryAmount.amount() - monetaryAmount.amount() * percent.getPercentage() / 100;
+        return new DiscountedAmount(monetaryAmount.amount() - monetaryAmount.amount() * percent.getPercentage() / 100);
     }
 
     public static void main(String[] args) {
@@ -36,14 +37,14 @@ public class DiscountCalculator {
             percentage = new Percent(30);
         }
 
-        double discount = calcDiscount(totalAmount, percentage);
+        DiscountedAmount discount = calcDiscount(totalAmount, percentage);
 
         if (totalAmount.amount() <= 80)
             return "You need to pay " + totalAmount.amount(); // or totalAmount.toString()
         else {
             return "Congrats, you've got " + percentage.getPercentage() + "% discount on the total purchase!"
-                + "\nYou save " + (totalAmount.amount() - discount)
-                + "\nNow you only need to pay " + discount;
+                + "\nYou save " + (totalAmount.amount() - discount.amount())
+                + "\nNow you only need to pay " + discount.amount();
         }
     }
 }
