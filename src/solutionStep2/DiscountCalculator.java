@@ -19,15 +19,15 @@ public class DiscountCalculator {
         Percent percentage;
 
         if (totalAmount.amount() <= 80) {
-            percentage = new Percent(0);
+            percentage = Percent.fromNumeral(0);
         } else if (totalAmount.amount() > 80 && totalAmount.amount() <= 150) {
-            percentage = new Percent(10);
+            percentage = Percent.fromNumeral(10);
         } else if (totalAmount.amount() > 150 && totalAmount.amount() <= 250) {
-            percentage = new Percent(15);
+            percentage = Percent.fromNumeral(15);
         } else if (totalAmount.amount() > 250 && totalAmount.amount() <= 500) {
-            percentage = new Percent(20);
+            percentage = Percent.fromNumeral(20);
         } else {
-            percentage = new Percent(30);
+            percentage = Percent.fromNumeral(30);
         }
 
         DiscountedAmount discount = totalAmount.applyDiscount(percentage);
