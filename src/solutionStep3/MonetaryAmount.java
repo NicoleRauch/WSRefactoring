@@ -5,4 +5,8 @@ public record MonetaryAmount(double amount) {
 
         return new DiscountedAmount(amount - amount * percent.asDecimal());
     }
+
+    public boolean isNotMoreThan(int otherAmount) {
+        return amount <= otherAmount;
+    }
 }
