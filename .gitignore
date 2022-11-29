@@ -2,3 +2,4 @@ out
 workspace.xml
 misc.xml
 WSRefactoring.iml
+*.class
